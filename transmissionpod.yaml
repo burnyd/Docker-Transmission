@@ -1,0 +1,25 @@
+#Simple K8s pod to run transmission on a raspberry pi with the dockerfile. 
+
+apiVersion: v1
+kind: Pod
+metadata:
+  name: transmission
+  namespace: default
+spec:
+  containers:
+  - name: transmissiontestpod
+    image: elk:5000/transmission
+    imagePullPolicy: Always
+    securityContext:
+          privileged: true
+    ports:
+    - containerPort: 9091
+    volumeMounts:
+    - name: media-nfs
+      mountPath: /media/nfs
+  volumes:
+  - name: media-nfs
+    hostPath:
+      path: /media/nfs 
+  nodeSelector:
+    beta.kubernetes.io/arch: arm
