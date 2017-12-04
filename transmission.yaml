@@ -1,0 +1,29 @@
+apiVersion: apps/v1beta1 
+kind: Deployment
+metadata:
+  name: transmission
+spec:
+  replicas: 3
+  template:
+    metadata:
+      labels:
+        app: transmission
+        run: transmission
+    spec:
+      containers:
+      - name: transmission
+        image: elk:5000/transmission
+        imagePullPolicy: Always
+        securityContext:
+          privileged: true
+        ports: 
+        - containerPort: 9091
+        volumeMounts:
+        - name: media-nfs
+          mountPath: /media/nfs
+      volumes:
+      - name: media-nfs
+        hostPath:
+          path: /media/nfs 
+      nodeSelector: 
+          beta.kubernetes.io/arch: arm
