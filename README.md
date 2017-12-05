@@ -1,14 +1,10 @@
 # Docker-Transmission
 ![Alt text](transmission-logo.jpg?raw=true "Pi")
-This is a simple Docker file to run Transmission torrent downloader on a ARMv7 Raspberry Pi3 server. 
 
-Include both the Docker file and the settings.json file in the same directory.
+This is a simple repository for running transmission a simple web app to download torrents.  This is geared towards and implementation with Raspberry pi3 / Arm64 processors that want to run either transmission in a standalone container or inside of kubernetes.. 
 
-docker build -t transmission . 
-
-Push the file to a docker repo.
-
-The two yaml files are k8s manifest files incase either it has to be ran as a deployment or a pod. 
-
-Should build a container with transmission inside of it. 
-
+Dockerfile - Creates the docker container transmission 
+settings.json - Adds to the transmission settings file
+transmission-service.yaml - Kubernetes service to expose the transmission deployment
+transmission.yaml - Kubernetes Pod for transmission 
+transmissionpod.yaml - Kubernetes deployment for transmission
